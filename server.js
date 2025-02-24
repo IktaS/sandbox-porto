@@ -71,7 +71,7 @@ app.use('*all', async (req, res) => {
 })
 
 io.on("connection", (socket) => {
-  var ptyProcess = pty.spawn("docker", ["exec", "-it", "-u", "visitor", "neofetch-porto", "sh"], {
+  var ptyProcess = pty.spawn("docker", ["exec", "-it", "-u", "visitor", "-w", "/home/visitor", "neofetch-porto", "bash"], {
     name: "xterm-color",
     cols: 80,
     rows: 30,
