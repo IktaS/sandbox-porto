@@ -3,6 +3,7 @@ import { Terminal } from '@xterm/xterm';
 import { FitAddon } from '@xterm/addon-fit';
 import { ImageAddon, IImageAddonOptions } from '@xterm/addon-image';
 import { WebLinksAddon } from '@xterm/addon-web-links';
+import { LigaturesAddon } from '@xterm/addon-ligatures';
 
 const customSettings = {
     enableSizeReports: true,    // whether to enable CSI t reports (see below)
