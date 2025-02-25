@@ -3,7 +3,6 @@ import { Terminal } from '@xterm/xterm';
 import { FitAddon } from '@xterm/addon-fit';
 import { ImageAddon, IImageAddonOptions } from '@xterm/addon-image';
 import { WebLinksAddon } from '@xterm/addon-web-links';
-import { LigaturesAddon } from '@xterm/addon-ligatures';
 
 const customSettings = {
     enableSizeReports: true,    // whether to enable CSI t reports (see below)
@@ -18,7 +17,11 @@ const customSettings = {
     iipSizeLimit: 20000000      // size limit of a single IIP sequence
   }
 
-const socket = io();
+const socket = io({
+    extraHeaders: {
+      "mobile": document.documentElement.clientWidth < 900 ? true : false
+    }
+  });
 var term = new Terminal();
 const fit = new FitAddon();
 const image = new ImageAddon(customSettings);

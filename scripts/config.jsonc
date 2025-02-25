@@ -4,8 +4,7 @@
       "source": "/assets/profile.sixel",
       "height": 30,
       "width": 40,
-      "type": "raw",
-      "position": "right"
+      "type": "raw"
     },
     "display": {
       "separator": "  "

@@ -70,8 +70,8 @@ app.use('*all', async (req, res) => {
   }
 })
 
-const spawnShell = () => {
-  return pty.spawn("docker", ["exec", "-it", "-u", "visitor", "-w", "/home/visitor", "sandbox-porto", "bash"], {
+const spawnShell = (isMobile) => {
+  return pty.spawn("docker", ["exec", "-it", "-u", "visitor", "-w", "/home/visitor", "-e", `IS_MOBILE=${isMobile}`, "sandbox-porto", "bash"], {
     name: "xterm-color",
     cols: 80,
     rows: 30,
@@ -79,7 +79,7 @@ const spawnShell = () => {
 };
 
 io.on("connection", (socket) => {
-  let ptyProcess = spawnShell();
+  let ptyProcess = spawnShell(socket.handshake.headers.mobile);
 
   ptyProcess.onData((data) => {
     socket.emit("terminal.incomingData", data);
