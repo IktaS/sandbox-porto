@@ -1,7 +1,6 @@
 FROM alpine:edge
 RUN apk update
 RUN apk upgrade
-RUN apk add nano
 RUN apk add fastfetch
 RUN apk add bash
 ADD ./scripts /scripts

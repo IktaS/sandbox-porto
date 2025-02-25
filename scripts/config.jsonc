@@ -26,21 +26,24 @@
         "format": "{#1}│ {#}General Information"
       },
       {
-        "type": "os",
-        "key": "{#separator}│  {#keys} OS"
+        "type": "custom",
+        "format": "{#separator}│  {#bright_magenta} Name {#} Imam Rafii Al Dzakwan"
       },
       {
-        "type": "kernel",
-        "key": "{#separator}│  {#keys} Kernel"
+        "type": "custom",
+        "format": "{#separator}│  {#bright_magenta} Location {#} Solo, Indonesia"
       },
       {
-        "type": "uptime",
-        "key": "{#separator}│  {#keys} Uptime"
+        "type": "custom",
+        "format": "{#separator}│  {#bright_magenta} Expertise {#} Payment System, Backend Engineering"
       },
       {
-        "type": "packages",
-        "key": "{#separator}│  {#keys} Packages",
-        "format": "{all}"
+        "type": "custom",
+        "format": "{#separator}│  {#bright_magenta} Note {#} Self-proclaimed inventor."
+      },
+      {
+        "type": "custom",
+        "format": "{#separator}│  {#}      Love engineering anything and love learning"
       },
       {
         "type": "custom",
@@ -49,31 +52,19 @@
       // Desktop Environment
       {
         "type": "custom",
-        "format": "{#1}│ {#}Desktop Environment"
+        "format": "{#1}│ {#}Socials"
       },
       {
-        "type": "de",
-        "key": "{#separator}│  {#keys}󰧨 DE"
+        "type": "custom",
+        "format": "{#separator}│  {#bright_blue} LinkedIn {#} https://www.linkedin.com/in/ikta"
       },
       {
-        "type": "wm",
-        "key": "{#separator}│  {#keys}󱂬 WM"
+        "type": "custom",
+        "format": "{#separator}│  {#bright_blue} Github {#} https://github.com/IktaS"
       },
       {
-        "type": "wmtheme",
-        "key": "{#separator}│  {#keys}󰉼 Theme"
-      },
-      {
-        "type": "display",
-        "key": "{#separator}│  {#keys}󰹑 Resolution"
-      },
-      {
-        "type": "shell",
-        "key": "{#separator}│  {#keys}󰞷 Shell"
-      },
-      {
-        "type": "terminalfont",
-        "key": "{#separator}│  {#keys}󰛖 Font"
+        "type": "custom",
+        "format": "{#separator}│  {#bright_blue} Blog {#} https://blog.ikta.dev/"
       },
       {
         "type": "custom",
@@ -82,28 +73,39 @@
       // Hardware Information
       {
         "type": "custom",
-        "format": "{#1}│ {#}Hardware Information"
+        "format": "{#1}│ {#}Current Projects"
       },
       {
-        "type": "cpu",
-        "key": "{#separator}│  {#keys}󰻠 CPU"
+        "type": "custom",
+        "format": "{#separator}│  {#bright_red} NFC Music Player"
       },
       {
-        "type": "gpu",
-        "key": "{#separator}│  {#keys}󰢮 GPU"
+        "type": "custom",
+        "format": "{#separator}│  {#}   Modern convenience with an analog feel."
       },
       {
-        "type": "memory",
-        "key": "{#separator}│  {#keys}󰍛 Memory"
+        "type": "custom",
+        "format": "{#separator}│  {#}   Attach and assign an NFC tag to anything"
       },
       {
-        "type": "disk",
-        "key": "{#separator}│  {#keys}󰋊 Disk (/)",
-        "folders": "/"
+        "type": "custom",
+        "format": "{#separator}│  {#}   and have the convenience of digital music"
+      },
+      {
+        "type": "custom",
+        "format": "{#separator}│  {#}   with the analog feel of physical media"
+      },
+      {
+        "type": "custom",
+        "format": "{#separator}│  {#bright_red}   Demo {#} https://youtu.be/J3ycUL5_f4s"
       },
       {
         "type": "custom",
         "format": "{#1}│"
+      },
+      {
+        "type": "custom",
+        "format": "{#separator}│  {#}Play around in the terminal!"
       },
       // Colors
       {
