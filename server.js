@@ -70,21 +70,31 @@ app.use('*all', async (req, res) => {
   }
 })
 
-io.on("connection", (socket) => {
-  var ptyProcess = pty.spawn("docker", ["exec", "-it", "-u", "visitor", "-w", "/home/visitor", "sandbox-porto", "bash"], {
+const spawnShell = () => {
+  return pty.spawn("docker", ["exec", "-it", "-u", "visitor", "-w", "/home/visitor", "sandbox-porto", "bash"], {
     name: "xterm-color",
     cols: 80,
     rows: 30,
-    cwd: process.env.HOME,
-    env: process.env,
+  });
+};
+
+io.on("connection", (socket) => {
+  let ptyProcess = spawnShell();
+
+  ptyProcess.onData((data) => {
+    socket.emit("terminal.incomingData", data);
   });
 
-  ptyProcess.on("data", function (data) {
-    io.emit("terminal.incomingData", data);
-  });
+  ptyProcess.onExit(() => {
+    socket.disconnect()
+  })
 
   socket.on("terminal.keystroke", (data) => {
     ptyProcess.write(data);
+  });
+
+  socket.on('disconnect', () => {
+    ptyProcess.kill();
   });
 });
 
