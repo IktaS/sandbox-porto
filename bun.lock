@@ -2,7 +2,7 @@
   "lockfileVersion": 1,
   "workspaces": {
     "": {
-      "name": "neofetch-porto",
+      "name": "sandbox-porto",
       "dependencies": {
         "@xterm/addon-fit": "^0.10.0",
         "@xterm/addon-image": "^0.8.0",
