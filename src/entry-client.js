@@ -26,7 +26,8 @@ const weblink = new WebLinksAddon();
 term.loadAddon(fit);
 term.loadAddon(image);
 term.loadAddon(weblink);
-term.open(document.getElementById('terminal'));
+const terminalContainer = document.getElementById('terminal');
+term.open(terminalContainer);
 term.onResize((data) => {
     socket.emit("terminal.resize", data);
 })
@@ -39,3 +40,8 @@ socket.on("terminal.incomingData", (data) => {
 term.onData((data) => {
     socket.emit("terminal.keystroke", data);
 });
+
+const resizeObserver = new ResizeObserver(entries => {
+    fit.fit();
+});
+resizeObserver.observe(terminalContainer);
