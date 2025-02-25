@@ -89,6 +89,10 @@ io.on("connection", (socket) => {
     socket.disconnect()
   })
 
+  socket.on("terminal.resize", (data) => {
+    ptyProcess.resize(data.cols, data.rows)
+  })
+
   socket.on("terminal.keystroke", (data) => {
     ptyProcess.write(data);
   });

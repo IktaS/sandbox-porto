@@ -27,6 +27,9 @@ term.loadAddon(fit);
 term.loadAddon(image);
 term.loadAddon(weblink);
 term.open(document.getElementById('terminal'));
+term.onResize((data) => {
+    socket.emit("terminal.resize", data);
+})
 fit.fit();
 
 socket.on("terminal.incomingData", (data) => {
