@@ -3,6 +3,7 @@ import { Terminal } from '@xterm/xterm';
 import { FitAddon } from '@xterm/addon-fit';
 import { ImageAddon, IImageAddonOptions } from '@xterm/addon-image';
 import { WebLinksAddon } from '@xterm/addon-web-links';
+import { Unicode11Addon } from '@xterm/addon-unicode11';
 
 const customSettings = {
     enableSizeReports: true,    // whether to enable CSI t reports (see below)
@@ -22,13 +23,18 @@ const socket = io({
       "mobile": document.documentElement.clientWidth < 900 ? true : false
     }
   });
-var term = new Terminal();
+var term = new Terminal({
+  allowProposedApi: true
+});
 const fit = new FitAddon();
 const image = new ImageAddon(customSettings);
 const weblink = new WebLinksAddon();
+const unicode = new Unicode11Addon();
 term.loadAddon(fit);
 term.loadAddon(image);
 term.loadAddon(weblink);
+term.loadAddon(unicode);
+term.unicode.activeVersion = '11';
 const terminalContainer = document.getElementById('terminal');
 term.open(terminalContainer);
 term.onResize((data) => {
