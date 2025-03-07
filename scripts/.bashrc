@@ -147,3 +147,7 @@ source "$OSH"/oh-my-bash.sh
 # alias ohmybash="mate ~/.oh-my-bash"
 
 if [[ "$IS_MOBILE" == "true" ]]; then fastfetch -l none; else fastfetch; fi
+
+read() {
+  if [[ "$IS_MOBILE" == "true" ]]; then glow "$1" -w 40 -s 'dracula'; else glow "$1" -w 60 -n -t -s 'dracula'; fi
+}

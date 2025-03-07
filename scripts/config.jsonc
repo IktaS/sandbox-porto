@@ -104,7 +104,7 @@
       },
       {
         "type": "custom",
-        "format": "{#separator}│  {#}Read my CV using {#bright_magenta}glow cv.md{#}!"
+        "format": "{#separator}│  {#}Read my CV using {#bright_magenta}read cv.md{#}!"
       },
       // Colors
       {
