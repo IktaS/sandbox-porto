@@ -1,6 +1,3 @@
 # style name or JSON path (default "auto")
 style: "dracula"
-# at which column should we word wrap?
-width: 40
-# show all files, including hidden and ignored.
-all: false
+width: 60

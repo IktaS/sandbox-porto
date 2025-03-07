@@ -1,5 +1,7 @@
 # Imam Rafii Al Dzakwan
-#### [Github](https://github.com/IktaS) | [LinkedIn](https://www.linkedin.com/in/imamrafiia/) | [E-Mail](mailto:imamrafiia@gmail.com)
+#### [Github](https://github.com/IktaS) 
+#### [LinkedIn](https://www.linkedin.com/in/imamrafiia/) 
+#### [E-Mail](mailto:imamrafiia@gmail.com)
 ---
 ## Education
 * Sepuluh Nopember Institute of Technology (2018 - 2022)

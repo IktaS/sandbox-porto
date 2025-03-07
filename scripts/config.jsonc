@@ -102,6 +102,10 @@
         "type": "custom",
         "format": "{#separator}│  {#}Play around in the terminal!"
       },
+      {
+        "type": "custom",
+        "format": "{#separator}│  {#}Read my CV using {#bright_magenta}glow cv.md{#}!"
+      },
       // Colors
       {
         "type": "colors",
