@@ -1,0 +1,22 @@
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA512
+
+Contact: mailto:imamrafiia+security@gmail.com
+Expires: 2027-04-06T16:59:00.000Z
+Encryption: https://ikta.dev/pgp-pub.txt
+Preferred-Languages: en, id
+Canonical: https://ikta.dev/security.txt
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAEBCgAdFiEElbOpQx1UXGfVfxNyXvFPSUsQNPIFAmfyo04ACgkQXvFPSUsQ
+NPKsagv/ZSlpwvBE+D3i1LKYDQRziQxMQhCIqJUjSlj4jMrktouvPcHcABwVEKc3
+HmPTLLsBoSt6iDMy+ePH9KZTgCEUsRLjLFDCTL2+FFJELGklvyedcDsiRUvv6mNX
+avwOFh5610Q/uKaWiuwdF0LFyvNdbvHqz5WB0rYlO1nE+K4tE6u0ZtojfJftgP8B
+xI2jWx+pADD+pqImxLO/BZUAa3A6Q6k1C+u7eiBEVUdr/6F9KrCDCsjXByaV9Dvz
+/TlsveNdjsV0Xp7uqjezZmplgNJtBP5Z8Dld4QQ13Z2dNwduiylmMobBPPY/m00Q
+qysvDMHyYLet/lSUxWtgYEjClFtk6fwvOKTvaayFOULkgqYhwDpiDbdGmW3gXuIs
+jtHXO0WJTKlWwfD33DTkqDhFVtzh88yP7mmuKfBiB/zf+bU3PAcdqpGg7CqUYzBi
+zTzw3AaHd3HqBTDEq+VlGa4EJiSpRg0uQA93qwB1RZcNa1x+wCqyAi/gpFj5N42o
+oMkWzDyV
+=VN9G
+-----END PGP SIGNATURE-----
