@@ -26,7 +26,7 @@ const socket = io({
 var term = new Terminal({
   allowProposedApi: true,
   theme: {
-    background: "#708090",
+    background: "#5e5c64",
   },
 });
 const fit = new FitAddon();
