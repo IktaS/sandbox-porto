@@ -1,5 +1,5 @@
 deploy:
-    typst compile --format html ./scripts/cv.typ --features html ./scripts/cv.html
+	typst compile --format html ./scripts/cv.typ --features html ./scripts/cv.html
 	docker build --network=host -t sandbox-porto .
 	docker stop sandbox-porto || true && \
 	docker remove sandbox-porto || true && \
