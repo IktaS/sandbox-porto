@@ -7,7 +7,7 @@ deploy:
 	 --cap-drop NET_RAW \
 	 --cap-drop NET_ADMIN \
 	 --network none \
-	 -m 256m --cpus=1 \
+	 -m 512m --cpus=2 \
 	 --name sandbox-porto \
 	 -d sandbox-porto
 
