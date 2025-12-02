@@ -1,5 +1,4 @@
 deploy:
-	typst compile --format html ./scripts/cv.typ --features html ./scripts/cv.html
 	docker build --network=host -t sandbox-porto .
 	docker stop sandbox-porto || true && \
 	docker remove sandbox-porto || true && \
@@ -14,3 +13,6 @@ deploy:
 
 render-sixel:
 	img2sixel -h 500 -w auto ./public/profile.jpg > ./public/profile.sixel
+
+render-cv-html:
+	typst compile --format html ./scripts/cv.typ --features html cv.html

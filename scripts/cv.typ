@@ -1,4 +1,5 @@
-#import "@local/basic-resume-html:1.0.0": *
+#import "./basic-typst-resume-template-html/src/lib.typ": *
+#import "./basic-typst-resume-template-html/src/resume.typ": *
 
 // Put your personal information here, replacing mine
 #let name = "Imam Rafii Al Dzakwan"

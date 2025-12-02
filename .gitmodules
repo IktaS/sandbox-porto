@@ -1,0 +1,3 @@
+[submodule "basic-typst-resume-template-html"]
+	path = scripts/basic-typst-resume-template-html
+	url = git@github.com:IktaS/basic-typst-resume-template-html.git
