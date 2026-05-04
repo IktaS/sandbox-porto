@@ -1,7 +1,7 @@
 FROM ghcr.io/typst/typst:0.14.0 AS builder
 ADD ./scripts/basic-typst-resume-template-html /scripts/basic-typst-resume-template-html
 ADD ./scripts/cv.typ /scripts/cv.typ
-RUN typst compile --format html /scripts/cv.typ --features html cv.html
+RUN typst compile --format html /scripts/cv.typ cv.html
 FROM alpine:edge
 RUN apk update
 RUN apk upgrade

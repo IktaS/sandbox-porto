@@ -31,12 +31,6 @@
     ligatures: false
   )
 
-  // Reccomended to have 0.5in margin on all sides
-  set page(
-    margin: (0.5in),
-    paper: paper,
-  )
-
   // Link styles
   show link: underline
 
@@ -235,6 +229,13 @@
 #let github = "github.com/IktaS"
 #let linkedin = "linkedin.com/in/imamrafiia"
 #let personal-site = "ikta.dev"
+
+// Page configuration - applied at document level for PDF output
+// Note: HTML output ignores page settings as it's a continuous format
+#set page(
+  margin: (0.5in),
+  paper: "us-letter",
+)
 
 #show: resume.with(
   author: name,
