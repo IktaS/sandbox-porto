@@ -149,5 +149,5 @@ source "$OSH"/oh-my-bash.sh
 if [[ "$IS_MOBILE" == "true" ]]; then fastfetch -l none; else fastfetch; fi
 
 read() {
-  if [[ "$IS_MOBILE" == "true" ]]; then lynx "$1" -width=40; else lynx "$1" -w 60; fi
+  if [[ "$IS_MOBILE" == "true" ]]; then lynx "$1" -width=40; else lynx "$1"; fi
 }
