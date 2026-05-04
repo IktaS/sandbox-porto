@@ -230,13 +230,6 @@
 #let linkedin = "linkedin.com/in/imamrafiia"
 #let personal-site = "ikta.dev"
 
-// Page configuration - applied at document level for PDF output
-// Note: HTML output ignores page settings as it's a continuous format
-#set page(
-  margin: (0.5in),
-  paper: "us-letter",
-)
-
 #show: resume.with(
   author: name,
   // All the lines below are optional.
