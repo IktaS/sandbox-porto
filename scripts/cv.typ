@@ -1,5 +1,232 @@
-#import "./basic-typst-resume-template-html/src/lib.typ": *
-#import "./basic-typst-resume-template-html/src/resume.typ": *
+#let resume(
+  author: "",
+  author-position: left,
+  personal-info-position: left,
+  pronouns: "",
+  location: "",
+  email: "",
+  github: "",
+  linkedin: "",
+  phone: "",
+  personal-site: "",
+  accent-color: "#000000",
+  font: "New Computer Modern",
+  paper: "us-letter",
+  author-font-size: 20pt,
+  font-size: 10pt,
+  lang: "en",
+  body,
+) = {
+
+  // Sets document metadata
+  set document(author: author, title: author)
+
+  // Document-wide formatting, including font and margins
+  set text(
+    // LaTeX style font
+    font: font,
+    size: font-size,
+    lang: lang,
+    // Disable ligatures so ATS systems do not get confused when parsing fonts.
+    ligatures: false
+  )
+
+  // Reccomended to have 0.5in margin on all sides
+  set page(
+    margin: (0.5in),
+    paper: paper,
+  )
+
+  // Link styles
+  show link: underline
+
+
+  // Small caps for section titles
+  show heading.where(level: 2): it => [
+    #pad(top: 0pt, bottom: -10pt, [#smallcaps(it.body)])
+    #line(length: 100%, stroke: 1pt)
+  ]
+
+  // Accent Color Styling
+  show heading: set text(
+    fill: rgb(accent-color),
+  )
+
+  show link: set text(
+    fill: rgb(accent-color),
+  )
+
+  // Name will be aligned left, bold and big
+  show heading.where(level: 1): it => [
+    #set align(author-position)
+    #set text(
+      weight: 700,
+      size: author-font-size,
+    )
+    #pad(it.body)
+  ]
+
+  // Level 1 Heading
+  [= #(author)]
+
+  // Personal Info Helper
+  let contact-item(value, prefix: "", link-type: "") = {
+    if value != "" {
+      if link-type != "" {
+        link(link-type + value)[#(prefix + value)]
+      } else {
+        value
+      }
+    }
+  }
+
+  // Personal Info
+  pad(
+    top: 0.25em,
+    align(personal-info-position)[
+      #{
+        let items = (
+          contact-item(pronouns),
+          contact-item(phone),
+          contact-item(location),
+          contact-item(email, link-type: "mailto:"),
+          contact-item(github, link-type: "https://"),
+          contact-item(linkedin, link-type: "https://"),
+          contact-item(personal-site, link-type: "https://"),
+        )
+        items.filter(x => x != none).join("  |  ")
+      }
+    ],
+  )
+
+  // Main body.
+  set par(justify: true)
+
+  body
+}
+
+// Generic two by two component for resume
+#let generic-two-by-two(
+  top-left: "",
+  top-right: "",
+  bottom-left: "",
+  bottom-right: "",
+) = {
+  [
+    #top-left #h(1fr) #top-right \
+    #bottom-left #h(1fr) #bottom-right
+  ]
+}
+
+// Generic one by two component for resume
+#let generic-one-by-two(
+  left: "",
+  right: "",
+) = {
+  [
+    #left #h(1fr) #right
+  ]
+}
+
+// Cannot just use normal --- ligature becuase ligatures are disabled for good reasons
+#let dates-helper(
+  start-date: "",
+  end-date: "",
+) = {
+  start-date + " " + $dash.em$ + " " + end-date
+}
+
+// Section components below
+#let edu(
+  institution: "",
+  dates: "",
+  degree: "",
+  gpa: "",
+  location: "",
+  // Makes dates on upper right like rest of components
+  consistent: false,
+) = {
+  if consistent {
+    // edu-constant style (dates top-right, location bottom-right)
+    generic-two-by-two(
+      top-left: strong(institution),
+      top-right: dates,
+      bottom-left: emph(degree),
+      bottom-right: emph(location),
+    )
+  } else {
+    // original edu style (location top-right, dates bottom-right)
+    generic-two-by-two(
+      top-left: strong(institution),
+      top-right: location,
+      bottom-left: emph(degree),
+      bottom-right: emph(dates),
+    )
+  }
+}
+
+#let work(
+  title: "",
+  dates: "",
+  company: "",
+  location: "",
+) = {
+  generic-two-by-two(
+    top-left: strong(title),
+    top-right: dates,
+    bottom-left: company,
+    bottom-right: emph(location),
+  )
+}
+
+#let project(
+  role: "",
+  name: "",
+  url: "",
+  dates: "",
+) = {
+  generic-one-by-two(
+    left: {
+      if role == "" {
+        [*#name* #if url != "" and dates != "" [ (#link("https://" + url)[#url])]]
+      } else {
+        [*#role*, #name #if url != "" and dates != ""  [ (#link("https://" + url)[#url])]]
+      }
+    },
+    right: {
+      if dates == "" and url != "" {
+        link("https://" + url)[#url]
+      } else {
+        dates
+      }
+    },
+  )
+}
+
+#let certificates(
+  name: "",
+  issuer: "",
+  url: "",
+  date: "",
+) = {
+  [
+    *#name*, #issuer
+    #if url != "" {
+      [ (#link("https://" + url)[#url])]
+    }
+    #h(1fr) #date
+  ]
+}
+
+#let extracurriculars(
+  activity: "",
+  dates: "",
+) = {
+  generic-one-by-two(
+    left: strong(activity),
+    right: dates,
+  )
+}
 
 // Put your personal information here, replacing mine
 #let name = "Imam Rafii Al Dzakwan"
@@ -27,45 +254,34 @@
   personal-info-position: left,
 )
 
-/*
-* Lines that start with == are formatted into section headings
-* You can use the specific formatting functions if needed
-* The following formatting functions are listed below
-* #edu(dates: "", degree: "", gpa: "", institution: "", location: "", consistent: false)
-* #work(company: "", dates: "", location: "", title: "")
-* #project(dates: "", name: "", role: "", url: "")
-* certificates(name: "", issuer: "", url: "", date: "")
-* #extracurriculars(activity: "", dates: "")
-* There are also the following generic functions that don't apply any formatting
-* #generic-two-by-two(top-left: "", top-right: "", bottom-left: "", bottom-right: "")
-* #generic-one-by-two(left: "", right: "")
-*/
-== Education
-
-#edu(
-  institution: "Sepuluh November Institute of Technology",
-  location: "Surabaya, ID",
-  dates: dates-helper(start-date: "Aug 2018", end-date: "Sep 2022"),
-  degree: "Bachelor's of Informatics, Informatics",
-
-  // Uncomment the line below if you want edu formatting to be consistent with everything else
-  // consistent: true
-)
-- Cumulative GPA: 3.77\/4.0
-- Relevant Coursework: Data Structures, Program Development, Software Engineering, Distributed Databases, Distributed Systems
+Backend-focused Lead Software Engineer (3.5 YOE) with strong experience in system design, service optimization, and distributed systems. Proven track record improving system performance (e.g., 2x processing speed, 50% DB load reduction, 80% memory reduction) and leading major architectural initiatives, including microservices, observability, deployment pipelines, and real-time settlement systems. Skilled in Go, PostgreSQL, Kafka, Kubernetes, and large-scale financial systems. Experienced in payment integrations, reconciliation automation, and building robust internal platforms. IELTS 7.5 and JLPT N3 certified.
 
 == Work Experience
+
+#work(
+  title: "Senior Software Engineer",
+  location: "Earth, Solar System",
+  company: "Deel.com",
+  dates: dates-helper(start-date: "February 2026", end-date: "Present"),
+)
+- Payroll Integration EMS <\-> PMS Migration
+  - In my first few months, I am taking on the responsibility of migrating some deprecated endpoints of the Deel Employment Service to Payroll Management Service
+- Payroll Group and Vendor Mapping Stabilization
+  - Reviewed the flow and bugs inside Payroll Group and Vendor Mapping flow
+  - Communicated with stakeholder on the usage of this flow
+  - Fixed all bugs and created additional improvement to guarantee 100% success rate of the flows.
+
 
 #work(
   title: "Lead Software Engineer",
   location: "Jakarta, ID",
   company: "Durianpay.id",
-  dates: dates-helper(start-date: "Aug 2024", end-date: "Present"),
+  dates: dates-helper(start-date: "Aug 2024", end-date: "February 2026"),
 )
 - Overall System and Process Optimization
   - Integrated Go’s profiler in order to identify and optimize the memory usage of services. In one instance finding an Excel parsing optimization that leads to 80% reduction of memory usage.
   - Spearheaded the usage of pg_repack in PostgreSQL in our current system in order to optimize database processes while not affecting normal traffic.
-  - Identified old bad practices and leading company wide policy change to better engineering practices.
+  - Identified old bad practices and leading company wide policy change to better engineering practices. Including things like making coding guidelines regarding Idiomatic Go, gave engineering wide talk on the bad patterns currently in our code
   - Lead the ideation of new deployment pipelines that allow for parallel independent deployment for each squads in order to keep up with the scaling of the team. Together with DevOps team, defined a new Jenkins Pipeline and Kubernetes deployment flow.
   - Implement system observability using VictoriaMetrics and Grafana.
 - Design and implement a new settlement processing flow.
@@ -74,11 +290,11 @@
 - Designed and implemented Realtime Settlement
   - Designed and developed a feature in which using our connected bank accounts that allow for almost real time settlement, with SLA between when the money is received to settled to merchant’s bank in under 30 minute.
   - Using Kafka for cross-service integration, implemented a Saga pattern in microservice to orchestrate a cross-service, cross-team function.
-// - Designed an Automatic Settlement Reconciliation System from Email.
-//   - Developed custom scripts and tools to securely retrieve and parse settlement-related emails, streamlining the reconciliation process and improving accuracy.
-//   - Reduced manual intervention, eliminating common errors and discrepancies associated with manual data entry and reconciliation.
-// - Designed Automated Settlement Scheduler
-//   - Led the design and implementation of an automated settlement scheduler, streamlining the process and ensuring accurate, timely settlements without manual intervention.
+- Designed an Automatic Settlement Reconciliation System from Email.
+  - Developed custom scripts and tools to securely retrieve and parse settlement-related emails, streamlining the reconciliation process and improving accuracy.
+  - Reduced manual intervention, eliminating common errors and discrepancies associated with manual data entry and reconciliation.
+- Designed Automated Settlement Scheduler
+  - Led the design and implementation of an automated settlement scheduler, streamlining the process and ensuring accurate, timely settlements without manual intervention.
 
 #work(
   title: "Software Engineer",
@@ -115,14 +331,42 @@
 - Maintain the core service of Bills and Top up Team. Mainly the checkout system of digital bills products in Tokopedia.com
 - Notable projects: Migrating legacy code REST API to gRPC
 
-#work(
-  title: "Backend Software Engineer Intern",
-  location: "Jakarta, ID",
-  company: "Bukalapak.com",
-  dates: dates-helper(start-date: "Jun 2021", end-date: "Sep 2021"),
+// #work(
+//   title: "Backend Software Engineer Intern",
+//   location: "Jakarta, ID",
+//   company: "Bukalapak.com",
+//   dates: dates-helper(start-date: "Jun 2021", end-date: "Sep 2021"),
+// )
+// - Part of the Core Search team that works on maintaining the main Elasticsearch system that is used for the main search feature of Bukalapak.com
+// - Designed and implemented dynamic search query configuration system
+
+/*
+* Lines that start with == are formatted into section headings
+* You can use the specific formatting functions if needed
+* The following formatting functions are listed below
+* #edu(dates: "", degree: "", gpa: "", institution: "", location: "", consistent: false)
+* #work(company: "", dates: "", location: "", title: "")
+* #project(dates: "", name: "", role: "", url: "")
+* certificates(name: "", issuer: "", url: "", date: "")
+* #extracurriculars(activity: "", dates: "")
+* There are also the following generic functions that don't apply any formatting
+* #generic-two-by-two(top-left: "", top-right: "", bottom-left: "", bottom-right: "")
+* #generic-one-by-two(left: "", right: "")
+*/
+== Education
+
+#edu(
+  institution: "Sepuluh November Institute of Technology",
+  location: "Surabaya, ID",
+  dates: dates-helper(start-date: "Aug 2018", end-date: "Sep 2022"),
+  degree: "Bachelor's of Informatics, Informatics",
+
+  // Uncomment the line below if you want edu formatting to be consistent with everything else
+  // consistent: true
 )
-- Part of the Core Search team that works on maintaining the main Elasticsearch system that is used for the main search feature of Bukalapak.com
-- Designed and implemented dynamic search query configuration system
+- Cumulative GPA: 3.77\/4.0
+- Relevant Coursework: Data Structures, Program Development, Software Engineering, Distributed Databases, Distributed Systems
+
 
 == Projects
 
@@ -178,13 +422,13 @@
 // - Volunteer and write tests for tournaments, including LA Regionals and SoCal State \@ Caltech
 
 == Certificates
-#certificates(
+- #certificates(
   name: "IELTS 7.5",
   issuer: "IELTS",
   // url: "",
   date: "Oct 2024",
 )
-#certificates(
+- #certificates(
   name: "JLPT N3",
   issuer: "JLPT",
   // url: "",

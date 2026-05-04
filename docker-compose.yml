@@ -1,0 +1,49 @@
+services:
+  sandbox-porto:
+    image: ghcr.io/iktas/sandbox-porto:latest
+    pull_policy: always
+    restart: unless-stopped
+    ports:
+      - "5173:5173"
+    environment:
+      - NODE_ENV=production
+      - PORT=5173
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    container_name: sandbox-porto
+    cap_drop:
+      - NET_RAW
+      - NET_ADMIN
+    network_mode: none
+    deploy:
+      resources:
+        limits:
+          cpus: '2'
+          memory: 512M
+    labels:
+      - "wud.watch=true"
+      - "wud.watch.digest=true"
+
+  wud:
+    image: getwud/wud:latest
+    restart: unless-stopped
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./docker-compose.yml:/wud/docker-compose.yml
+      - ./data/wud-store:/store
+    environment:
+      - WUD_REGISTRY_GHCR_PRIVATE_USERNAME=iktas
+      - WUD_REGISTRY_GHCR_PRIVATE_TOKEN=${WUD_GITHUB_TOKEN}
+      - WUD_TRIGGER_DOCKERCOMPOSE_SANDBOX_PORTO_FILE=/wud/docker-compose.yml
+      - WUD_TRIGGER_DOCKERCOMPOSE_SANDBOX_PORTO_PRUNE=true
+      - WUD_TRIGGER_DOCKERCOMPOSE_SANDBOX_PORTO_AUTO=true
+      - WUD_SERVER_PORT=3000
+    ports:
+      - "3000:3000"
+    container_name: wud
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
