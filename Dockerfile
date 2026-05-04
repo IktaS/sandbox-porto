@@ -12,6 +12,7 @@ RUN apk add lynx
 ADD ./scripts/setup_user.sh /scripts/setup_user.sh
 ADD ./scripts/.bashrc /scripts/.bashrc
 ADD ./scripts/config.jsonc /scripts/config.jsonc
+ADD ./public/profile.sixel /assets/profile.sixel
 RUN chmod +x /scripts/setup_user.sh
 RUN /scripts/setup_user.sh
 COPY --from=builder /cv.html /home/visitor/cv.html
