@@ -15,4 +15,4 @@ render-sixel:
 	img2sixel -h 500 -w auto ./public/profile.jpg > ./public/profile.sixel
 
 render-cv-html:
-	typst compile --format html ./scripts/cv.typ cv.html
+	typst compile --format html --features html ./scripts/cv.typ cv.html
